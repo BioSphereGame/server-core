@@ -9,33 +9,33 @@ import (
 )
 
 type Counter struct {
-	counter.UnimplementedCounterServiceServer
+	counter.UnimplementedCounterServer
 	counterValue int32
 	mu           sync.Mutex
 }
 
-func (s *Counter) Get(ctx context.Context, _ *counter.Empty) (*counter.Counter, error) {
+func (s *Counter) Get(ctx context.Context, _ *counter.Empty) (*counter.Value, error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
 	log.Printf("Received 'Get', counter: %d\n", s.counterValue)
-	return &counter.Counter{Value: s.counterValue}, nil
+	return &counter.Value{Value: s.counterValue}, nil
 }
 
-func (s *Counter) Increment(ctx context.Context, _ *counter.Empty) (*counter.Counter, error) {
+func (s *Counter) Increment(ctx context.Context, _ *counter.Empty) (*counter.Value, error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
 	log.Printf("Received 'Increment', counter: %d\n", s.counterValue)
 	s.counterValue++
-	return &counter.Counter{Value: s.counterValue}, nil
+	return &counter.Value{Value: s.counterValue}, nil
 }
 
-func (s *Counter) Decrement(ctx context.Context, _ *counter.Empty) (*counter.Counter, error) {
+func (s *Counter) Decrement(ctx context.Context, _ *counter.Empty) (*counter.Value, error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
 	log.Printf("Received 'Decrement', counter: %d\n", s.counterValue)
 	s.counterValue--
-	return &counter.Counter{Value: s.counterValue}, nil
+	return &counter.Value{Value: s.counterValue}, nil
 }

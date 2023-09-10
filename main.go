@@ -22,7 +22,7 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	pb.RegisterCounterServiceServer(s, &counter.Counter{})
+	pb.RegisterCounterServer(s, &counter.Counter{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

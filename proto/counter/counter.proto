@@ -6,12 +6,12 @@ package counter;
 
 message Empty {}
 
-message Counter {
+message Value {
     int32 value = 1;
 }
 
-service CounterService {
-    rpc Get(Empty) returns (Counter);
-    rpc Increment(Empty) returns (Counter);
-    rpc Decrement(Empty) returns (Counter);
+service Counter {
+    rpc Get(Empty) returns (Value);
+    rpc Increment(Empty) returns (Value);
+    rpc Decrement(Empty) returns (Value);
 }
