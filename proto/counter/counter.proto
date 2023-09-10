@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "github.com/BioSphereGame/server-core/proto/counter";
+
+package counter;
+
+message Empty {}
+
+message Counter {
+    int32 value = 1;
+}
+
+service CounterService {
+    rpc Get(Empty) returns (Counter);
+    rpc Increment(Empty) returns (Counter);
+    rpc Decrement(Empty) returns (Counter);
+}
